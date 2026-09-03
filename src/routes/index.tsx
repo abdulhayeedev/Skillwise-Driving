@@ -20,7 +20,7 @@ import {
 import { getPriceForPostcode, type PriceSet } from "@/lib/postcode-pricing";
 import heroImg from "@/assets/hero-driving.jpg";
 import instructorImg from "@/assets/instructor.jpg";
-import logoAsset from "@/assets/skillwise-logo.jpg.asset.json";
+import logoAsset from "@/assets/skillwise-logo.jpg";
 import { PassesSlider } from "@/components/PassesSlider";
 import { ResourcesSection } from "@/components/ResourcesSection";
 
@@ -181,7 +181,7 @@ function Header({
       <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-4 py-3 sm:px-6 lg:px-8">
         <a href="#top" className="flex min-w-0 items-center gap-3">
           <img
-            src={logoAsset.url}
+            src={logoAsset}
             alt="SkillWise Driving Academy logo"
             className="h-12 w-12 shrink-0 rounded-xl object-contain"
           />
@@ -1065,7 +1065,7 @@ function Footer() {
         <div>
           <div className="flex items-center gap-3">
             <img
-              src={logoAsset.url}
+              src={logoAsset}
               alt="SkillWise Driving Academy logo"
               className="h-12 w-12 rounded-xl bg-white object-contain p-1"
             />
