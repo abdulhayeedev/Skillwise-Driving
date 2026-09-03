@@ -30,23 +30,6 @@ import g28 from "@/assets/gallery/tell-me-11.jpg";
 import g29 from "@/assets/gallery/tell-me-12.jpg";
 import g30 from "@/assets/gallery/tell-me-13.jpg";
 import g31 from "@/assets/gallery/tell-me-14.jpg";
-import g32 from "@/assets/gallery/hc-green-light-myth.jpg";
-import g33 from "@/assets/gallery/car-test-ready-checklist.jpg";
-import g34 from "@/assets/gallery/hc-cyclists-stay-left-myth.jpg";
-import g35 from "@/assets/gallery/hc-pedestrians-myth.jpg";
-import g36 from "@/assets/gallery/cyclist-staying-left-roundabout.jpg";
-import g37 from "@/assets/gallery/hc-manoeuvre-mistake-myth.jpg";
-import g38 from "@/assets/gallery/look-right-dont-forget-forward.jpg";
-import g39 from "@/assets/gallery/hc-roundabout-look-right-myth.jpg";
-import g40 from "@/assets/gallery/turning-left-check-cyclists.jpg";
-import g41 from "@/assets/gallery/roundabout-lane-choice.jpg";
-import g42 from "@/assets/gallery/green-light-would-you-go.jpg";
-import g43 from "@/assets/gallery/check-last-before-moving-off.jpg";
-import g44 from "@/assets/gallery/double-mini-roundabouts.jpg";
-import g45 from "@/assets/gallery/road-markings-guide.jpg";
-import g46 from "@/assets/gallery/waiting-and-parking-rules.jpg";
-import g47 from "@/assets/gallery/hierarchy-of-road-users.jpg";
-import g48 from "@/assets/gallery/zebra-crossing-give-way.jpg";
 
 export type GalleryCategory = "school" | "tips" | "tellme";
 
@@ -89,31 +72,6 @@ export const GALLERY_ITEMS: GalleryItem[] = [
   { src: g29, title: "Tell Me 12 - Engine oil", category: "tellme" },
   { src: g30, title: "Tell Me 13 - Engine coolant", category: "tellme" },
   { src: g31, title: "Tell Me 14 - Brake fluid", category: "tellme" },
-  { src: g32, title: "Myth: Green means always go", category: "tips" },
-  { src: g33, title: "Is your car test-ready? (Annex 6)", category: "tips" },
-  { src: g34, title: "Myth: Cyclists must always stay left", category: "tips" },
-  { src: g35, title: "Myth: Pedestrians only matter once they step out", category: "tips" },
-  { src: g36, title: "Why is the cyclist staying left? (Rule 186)", category: "tips" },
-  { src: g37, title: "Myth: One mistake means you've failed", category: "tips" },
-  { src: g38, title: "Look right… but don't forget forward (Rule 185)", category: "tips" },
-  { src: g39, title: "Myth: You only need to look right at a roundabout", category: "tips" },
-  { src: g40, title: "Turning left? Check for cyclists first (Rule H3)", category: "tips" },
-  { src: g41, title: "Which lane would you choose? (Rules 184–186)", category: "tips" },
-  { src: g42, title: "Green light… would you go? (Rule H2)", category: "tips" },
-  { src: g43, title: "What do you check last before moving off? (Rule 159)", category: "tips" },
-  { src: g44, title: "One junction or two? Double mini-roundabouts (Rule 189)", category: "tips" },
-  { src: g45, title: "Do you know your road markings? (Rule H1)", category: "tips" },
-  { src: g46, title: "Can you stop here? Waiting & parking (Rule 240)", category: "tips" },
-  {
-    src: g47,
-    title: "Who has the greatest responsibility? Hierarchy of road users",
-    category: "tips",
-  },
-  {
-    src: g48,
-    title: "Zebra crossings: do you wait for them to step out? (Rule 195)",
-    category: "tips",
-  },
 ];
 
 export const GALLERY_CATEGORIES: { id: GalleryCategory | "all"; label: string }[] = [
