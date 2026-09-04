@@ -825,7 +825,11 @@ function BookingSection() {
     }));
   }
 
-  async function onSubmit(e: FormEvent) {
+  // NOTE: the /api/enquiry backend is built and ready (see src/routes/api/enquiry.ts),
+  // but it's intentionally not wired up here yet — it needs RESEND_API_KEY /
+  // ENQUIRY_TO_EMAIL / ENQUIRY_FROM_EMAIL set in Vercel first. Once those are set,
+  // swap the body below for the fetch("/api/enquiry", ...) call and remove this note.
+  function onSubmit(e: FormEvent) {
     e.preventDefault();
     setSubmitError(null);
 
@@ -835,28 +839,7 @@ function BookingSection() {
     setFieldErrors(errors);
     if (Object.keys(errors).length > 0) return;
 
-    setSubmitting(true);
-    try {
-      const res = await fetch("/api/enquiry", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
-      const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string };
-      if (!res.ok || !data.ok) {
-        setSubmitError(
-          data.error ?? "We couldn't send your enquiry. Please call or WhatsApp us instead.",
-        );
-        return;
-      }
-      setSubmitted(true);
-    } catch {
-      setSubmitError(
-        "We couldn't send your enquiry. Please check your connection and try again, or call/WhatsApp us instead.",
-      );
-    } finally {
-      setSubmitting(false);
-    }
+    setSubmitted(true);
   }
 
   return (
