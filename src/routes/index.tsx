@@ -18,8 +18,8 @@ import {
   X,
 } from "lucide-react";
 import { getPriceForPostcode, type PriceSet } from "@/lib/postcode-pricing";
+import { isValidUkMobile, isValidUkPostcode } from "@/lib/validation";
 import heroImg from "@/assets/hero-driving.jpg";
-import instructorImg from "@/assets/instructor.jpg";
 import logoAsset from "@/assets/skillwise-logo.jpg";
 import { PassesSlider } from "@/components/PassesSlider";
 import { ResourcesSection } from "@/components/ResourcesSection";
@@ -112,7 +112,7 @@ export const Route = createFileRoute("/")({
             itemListElement: [
               { area: "Rochdale", price: 70 },
               { area: "Oldham & Chadderton (OL1, OL2, OL3, OL4, OL8, OL9)", price: 76 },
-              { area: "Manchester (approved M postcode districts)", price: 76 },
+              { area: "Manchester (selected M postcode districts)", price: 76 },
             ].map((o) => ({
               "@type": "Offer",
               name: `2 hour driving lesson — ${o.area}`,
@@ -258,10 +258,12 @@ function Header({
 function Hero() {
   return (
     <section id="top" className="relative overflow-hidden bg-gradient-ink text-white">
+      {/* TODO: swap for Bilal's supplied SkillWise vehicle/learner image once received —
+          this is a generic stock photo, not an actual SkillWise tuition car. */}
       <div className="absolute inset-0 opacity-30">
         <img
           src={heroImg}
-          alt="Learner driver smiling in a red SkillWise driving school car"
+          alt="Learner driver smiling behind the wheel"
           width={1600}
           height={1100}
           className="h-full w-full object-cover"
@@ -275,13 +277,13 @@ function Hero() {
             Manchester
           </span>
           <h1 className="mt-5 font-display text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
-            Pass first time with <span className="text-brand">SkillWise Driving</span>
+            Learn to Drive with Confidence —{" "}
+            <span className="text-brand">SkillWise Driving Academy®</span>
           </h1>
           <p className="mt-5 max-w-xl text-base text-white/80 sm:text-lg">
-            Friendly, patient DVSA-approved instructors teaching manual and automatic lessons.
-            Honest area-based pricing — Rochdale or selected Manchester postcodes. 2-hour lessons
-            shown up front, because that's how pupils learn best. Send your enquiry in under 60
-            seconds and we'll confirm instructor availability.
+            Calm, structured manual and automatic driving lessons with SkillWise Driving Academy.
+            Enter your postcode to see your local price and send us your enquiry in under 60
+            seconds.
           </p>
           <div className="mt-7 flex flex-wrap gap-3">
             <a
@@ -299,7 +301,8 @@ function Hero() {
           </div>
           <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-white/80">
             <span className="inline-flex items-center gap-2">
-              <Star className="h-4 w-4 fill-brand text-brand" /> 4.9 / 5 (600+ reviews)
+              <Star className="h-4 w-4 fill-brand text-brand" /> Highly Rated by Learners • 5-Star
+              Google Reviews
             </span>
             <span className="inline-flex items-center gap-2">
               <ShieldCheck className="h-4 w-4 text-brand" /> DVSA-approved
@@ -426,7 +429,7 @@ function PriceResult({
     { label: "Motorway Training", price: `£${p.motorway2Hours} / 2 Hours` },
     { label: "Pass Plus", price: `£${p.passPlus6Hours} / 6 Hours` },
     { label: "Intensive Crash Course", price: `£${p.intensive10Hours} / 10 Hours` },
-    { label: "Test Day Package", price: `£${p.testDay}` },
+    { label: "Test Day Package", price: `£${p.testDay} / 2 Hours` },
   ];
   return (
     <div className="mt-6 overflow-hidden rounded-2xl border-2 border-brand/30 bg-gradient-to-br from-brand/5 to-transparent">
@@ -483,10 +486,10 @@ function PriceResult({
 /* ---------------- Stats bar ---------------- */
 function StatsBar() {
   const stats = [
-    { icon: Users, value: "5,000+", label: "Learners taught" },
-    { icon: Award, value: "Strong", label: "First-time pass record" },
-    { icon: Star, value: "4.9★", label: "Average rating" },
-    { icon: Clock, value: "12 yrs", label: "On the road" },
+    { icon: Star, value: "Highly Rated", label: "5-Star Google Reviews" },
+    { icon: Award, value: "Strong", label: "First-Time Pass Record" },
+    { icon: Clock, value: "6+ Years", label: "Experience" },
+    { icon: Car, value: "Manual & Automatic", label: "Driving Lessons" },
   ];
   return (
     <section className="bg-secondary text-secondary-foreground">
@@ -519,8 +522,8 @@ function ServicesSection() {
     },
     {
       title: "Intensive Courses",
-      desc: "Pass in 1–2 weeks with structured 4–6 hour daily sessions and a fast-track practical test.",
-      badge: "Fast track",
+      desc: "Structured intensive tuition delivered over a shorter period, ideal for learners looking to prepare quickly. Subject to learner suitability and practical test availability.",
+      badge: "Intensive",
     },
     {
       title: "Refresher Lessons",
@@ -529,7 +532,7 @@ function ServicesSection() {
     },
     {
       title: "Pass Plus",
-      desc: "Advanced post-test training. Save on insurance and drive safely in all conditions.",
+      desc: "Advanced post-test training designed to build experience and confidence across a wider range of driving situations.",
       badge: "Post-test",
     },
     {
@@ -539,7 +542,7 @@ function ServicesSection() {
     },
     {
       title: "Mock Test",
-      desc: "Full 40-minute DVSA-style mock in the test area with detailed feedback.",
+      desc: "2-hour mock test session including a full DVSA-style mock drive, test-area preparation and detailed feedback.",
       badge: "Test ready",
     },
   ];
@@ -597,18 +600,18 @@ function WhyChooseSection() {
     },
     {
       icon: Award,
-      title: "95% pass rate",
-      desc: "Proven, structured lesson plans that get results.",
+      title: "Strong first-time pass record",
+      desc: "Structured lessons, honest test-ready advice and genuine learner results.",
     },
     {
       icon: Clock,
       title: "Flexible hours",
-      desc: "Evenings, weekends and school-run friendly slots.",
+      desc: "Weekday, evening and weekend lesson times available.",
     },
     {
       icon: MapPin,
-      title: "Postcode pricing",
-      desc: "Honest rates — cheaper if you're closer to Rochdale.",
+      title: "Area-Based Pricing",
+      desc: "Enter your postcode to instantly see the correct lesson price for your area.",
     },
     {
       icon: Users,
@@ -713,14 +716,18 @@ function InstructorSection() {
             className="absolute -left-4 -top-4 h-full w-full rounded-3xl bg-gradient-brand"
             aria-hidden
           />
-          <img
-            src={instructorImg}
-            width={1000}
-            height={1000}
-            loading="lazy"
-            alt="SkillWise Driving Academy instructor giving a thumbs up next to a red car"
-            className="relative aspect-square w-full rounded-3xl object-cover shadow-brand"
-          />
+          {/* TODO: swap for Bilal's supplied instructor-section image once received.
+              Placeholder uses the brand mark only — no stock/AI-generated person photo. */}
+          <div className="relative flex aspect-square w-full items-center justify-center rounded-3xl bg-card shadow-brand">
+            <img
+              src={logoAsset}
+              width={220}
+              height={220}
+              loading="lazy"
+              alt="SkillWise Driving Academy"
+              className="w-2/5 max-w-[220px] object-contain"
+            />
+          </div>
         </div>
         <div>
           <span className="text-xs font-medium uppercase tracking-widest text-brand">
@@ -731,14 +738,15 @@ function InstructorSection() {
           </h2>
           <p className="mt-4 text-muted-foreground">
             Our instructors teach learners across Rochdale and selected Manchester areas. Every
-            lesson is one-to-one in a dual-controlled car, in the same area you'll sit your test.
-            Your SkillWise instructor is allocated by our team, subject to availability.
+            lesson is one-to-one in a dual-controlled tuition vehicle, with local test-area
+            preparation introduced where appropriate. Your SkillWise instructor is allocated by our
+            team, subject to availability.
           </p>
           <ul className="mt-6 grid gap-3">
             {[
               "DVSA-approved instructors",
-              "Manual & automatic lessons (automatic subject to instructor availability)",
-              "Free pick-up & drop-off in Rochdale",
+              "Manual & Automatic driving lessons",
+              "Pick-up arrangements agreed with your SkillWise instructor",
               "Female instructors available on request",
             ].map((li) => (
               <li key={li} className="flex items-start gap-3 text-sm font-semibold">
@@ -791,6 +799,9 @@ const AVAILABILITY_OPTIONS = [
 
 function BookingSection() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<{ phone?: string; postcode?: string }>({});
   const [form, setForm] = useState({
     name: "",
     phone: "",
@@ -814,9 +825,38 @@ function BookingSection() {
     }));
   }
 
-  function onSubmit(e: FormEvent) {
+  async function onSubmit(e: FormEvent) {
     e.preventDefault();
-    setSubmitted(true);
+    setSubmitError(null);
+
+    const errors: { phone?: string; postcode?: string } = {};
+    if (!isValidUkMobile(form.phone)) errors.phone = "Please enter a valid UK mobile number.";
+    if (!isValidUkPostcode(form.postcode)) errors.postcode = "Please enter a valid UK postcode.";
+    setFieldErrors(errors);
+    if (Object.keys(errors).length > 0) return;
+
+    setSubmitting(true);
+    try {
+      const res = await fetch("/api/enquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string };
+      if (!res.ok || !data.ok) {
+        setSubmitError(
+          data.error ?? "We couldn't send your enquiry. Please call or WhatsApp us instead.",
+        );
+        return;
+      }
+      setSubmitted(true);
+    } catch {
+      setSubmitError(
+        "We couldn't send your enquiry. Please check your connection and try again, or call/WhatsApp us instead.",
+      );
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -832,8 +872,8 @@ function BookingSection() {
           </h2>
           <p className="mt-4 text-muted-foreground">
             Tell us a little about what you're looking for and your availability. SkillWise Driving
-            Academy will review your enquiry and usually get back to you within 4 working hours with
-            instructor availability.
+            Academy will review your enquiry and get back to you as soon as possible, usually within
+            one working day.
           </p>
           <p className="mt-3 text-muted-foreground">
             We provide manual and automatic driving lessons across Rochdale and selected Manchester
@@ -913,8 +953,8 @@ function BookingSection() {
               <p className="mt-2 max-w-md text-sm text-muted-foreground">
                 We've received your enquiry — this is not a confirmed lesson yet. SkillWise Driving
                 Academy will review it and contact you on{" "}
-                <span className="font-semibold text-foreground">{form.phone}</span> within 4 working
-                hours with instructor availability.
+                <span className="font-semibold text-foreground">{form.phone}</span>. We'll review
+                your enquiry and get back to you as soon as possible.
               </p>
               <button
                 onClick={() => setSubmitted(false)}
@@ -941,11 +981,18 @@ function BookingSection() {
                     required
                     type="tel"
                     value={form.phone}
-                    onChange={(e) => update("phone", e.target.value)}
+                    onChange={(e) => {
+                      update("phone", e.target.value);
+                      if (fieldErrors.phone) setFieldErrors((f) => ({ ...f, phone: undefined }));
+                    }}
                     className="input"
-                    placeholder="07…"
+                    placeholder="07908 521 258"
                     maxLength={20}
+                    aria-invalid={Boolean(fieldErrors.phone)}
                   />
+                  {fieldErrors.phone && (
+                    <p className="mt-1 text-xs font-medium text-destructive">{fieldErrors.phone}</p>
+                  )}
                 </Field>
               </div>
               <div className="grid gap-4 sm:grid-cols-2">
@@ -953,11 +1000,21 @@ function BookingSection() {
                   <input
                     required
                     value={form.postcode}
-                    onChange={(e) => update("postcode", e.target.value)}
+                    onChange={(e) => {
+                      update("postcode", e.target.value);
+                      if (fieldErrors.postcode)
+                        setFieldErrors((f) => ({ ...f, postcode: undefined }));
+                    }}
                     className="input font-mono uppercase tracking-widest"
                     placeholder="OL16 1AB"
                     maxLength={10}
+                    aria-invalid={Boolean(fieldErrors.postcode)}
                   />
+                  {fieldErrors.postcode && (
+                    <p className="mt-1 text-xs font-medium text-destructive">
+                      {fieldErrors.postcode}
+                    </p>
+                  )}
                 </Field>
                 <Field label="Transmission">
                   <select
@@ -970,9 +1027,6 @@ function BookingSection() {
                   </select>
                 </Field>
               </div>
-              <p className="-mt-1 text-xs text-muted-foreground">
-                Automatic lessons subject to instructor availability.
-              </p>
               <Field label="Lesson type">
                 <select
                   value={form.lessonType}
@@ -1014,28 +1068,50 @@ function BookingSection() {
               </fieldset>
               <Field label="Notes / message">
                 <p className="mb-2 text-xs font-normal normal-case tracking-normal text-muted-foreground">
-                  Please tell us anything else that will help us with your enquiry, including your
-                  previous driving experience, whether you have passed your theory test, whether you
-                  have a practical test booked and, if applicable, your test date and test centre.
+                  Please tell us anything else that will help with your enquiry, including your
+                  previous driving experience, theory test status and, if you have a practical test
+                  booked, your test date and test centre.
                 </p>
                 <textarea
                   rows={4}
                   value={form.notes}
                   onChange={(e) => update("notes", e.target.value)}
                   className="input min-h-28"
-                  placeholder="Previous experience, theory passed, practical test date/test centre and anything else we should know…"
+                  placeholder="Previous experience, theory passed, test date/test centre and anything else we should know…"
                   maxLength={800}
                 />
               </Field>
+              <p className="-mt-1 text-xs text-muted-foreground">
+                Lessons are subject to our 48-hour cancellation and rescheduling policy. Please read
+                our{" "}
+                <a
+                  href="/terms-and-cancellation-policy"
+                  className="font-medium text-brand underline"
+                >
+                  Terms &amp; Cancellation Policy
+                </a>{" "}
+                before booking.
+              </p>
+              {submitError && (
+                <p className="rounded-lg border border-destructive/30 bg-destructive/5 p-3 text-sm font-medium text-destructive">
+                  {submitError}
+                </p>
+              )}
               <button
                 type="submit"
-                className="mt-2 inline-flex h-14 items-center justify-center gap-2 rounded-xl bg-gradient-brand text-base font-semibold uppercase tracking-widest text-brand-foreground shadow-brand transition hover:scale-[1.01]"
+                disabled={submitting}
+                className="mt-2 inline-flex h-14 items-center justify-center gap-2 rounded-xl bg-gradient-brand text-base font-semibold uppercase tracking-widest text-brand-foreground shadow-brand transition hover:scale-[1.01] disabled:opacity-60 disabled:hover:scale-100"
               >
-                Check availability
+                {submitting ? "Sending…" : "Check availability"}
               </button>
               <p className="text-center text-xs text-muted-foreground">
                 Submitting this form is an enquiry, not a confirmed lesson. Our team will confirm
-                instructor availability before anything is booked. We never share your details.
+                instructor availability before anything is booked. Your information will only be
+                used to respond to your enquiry and manage your lessons in accordance with our{" "}
+                <a href="/privacy-policy" className="font-medium text-brand underline">
+                  Privacy Policy
+                </a>
+                .
               </p>
             </form>
           )}
@@ -1145,15 +1221,23 @@ function Footer() {
         <div>
           <h4 className="font-display text-sm font-semibold uppercase tracking-widest">Hours</h4>
           <ul className="mt-3 space-y-2 text-sm text-white/70">
-            <li>Mon – Fri: 7am – 9pm</li>
-            <li>Saturday: 8am – 6pm</li>
-            <li>Sunday: 9am – 4pm</li>
+            <li>Monday – Sunday</li>
+            <li>8:00am – 8:00pm</li>
           </ul>
         </div>
       </div>
       <div className="mx-auto mt-10 max-w-7xl space-y-2 border-t border-white/10 px-4 pt-6 text-center text-xs text-white/50 sm:px-6 lg:px-8">
         <p>© {new Date().getFullYear()} SkillWise Driving Academy. All rights reserved.</p>
         <p>SkillWise Driving Academy® is a registered trade mark in the United Kingdom.</p>
+        <p>
+          <a href="/privacy-policy" className="hover:text-white">
+            Privacy Policy
+          </a>
+          {" · "}
+          <a href="/terms-and-cancellation-policy" className="hover:text-white">
+            Terms &amp; Cancellation Policy
+          </a>
+        </p>
       </div>
     </footer>
   );
@@ -1193,19 +1277,19 @@ const AREAS = [
     town: "Driving lessons in Rochdale",
     price: "£70 / 2 hours (£35 per hour)",
     blurb:
-      "Our home patch. Lessons cover Rochdale town centre, Heywood, Castleton, Norden, Milnrow and Littleborough, with mock tests on the routes used by Rochdale test centre.",
+      "Our home patch. Lessons cover Rochdale town centre, Heywood, Castleton, Norden, Milnrow and Littleborough, with practice on local roads, junctions and roundabouts commonly encountered around Rochdale Driving Test Centre.",
   },
   {
     town: "Driving lessons in Oldham & Chadderton",
     price: "£76 / 2 hours (£38 per hour)",
     blurb:
-      "Oldham, Chadderton, Royton, Shaw, Failsworth and Saddleworth learners get free pick-up from home, college or work, plus practice on the hills and tram crossings examiners love.",
+      "Oldham, Chadderton, Royton, Shaw, Failsworth and Saddleworth learners can have pick-up arrangements agreed with their SkillWise instructor. Lessons can include Oldham's hill starts, busy junctions, tram crossings and local test-area roads where appropriate.",
   },
   {
     town: "Driving lessons in Manchester",
     price: "£76 / 2 hours (£38 per hour)",
     blurb:
-      "City-centre traffic, bus lanes and multi-lane roundabouts across our approved Manchester postcode areas — taught calmly in a dual-controlled car.",
+      "City-centre traffic, bus lanes and multi-lane roundabouts across our selected Manchester postcode areas — taught calmly in a dual-controlled car.",
   },
 ];
 

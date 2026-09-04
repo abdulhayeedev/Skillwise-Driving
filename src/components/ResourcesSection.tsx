@@ -13,13 +13,16 @@ export function ResourcesSection() {
   return (
     <section id="resources" className="bg-muted/40 py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <span className="text-xs font-medium uppercase tracking-widest text-brand">Learning hub</span>
+        <span className="text-xs font-medium uppercase tracking-widest text-brand">
+          Learning hub
+        </span>
         <h2 className="mt-2 font-display text-3xl font-semibold tracking-tight sm:text-4xl">
           Free lesson guides &amp; test-day help
         </h2>
         <p className="mt-3 max-w-2xl text-sm text-muted-foreground sm:text-base">
-          Everything we teach in the car, in one place — mirror setup, gear changes, test-day nerves and
-          the full set of DVSA &ldquo;show me, tell me&rdquo; answers. Tap any card to read it full size.
+          Everything we teach in the car, in one place — mirror setup, gear changes, test-day nerves
+          and the full set of DVSA &ldquo;show me, tell me&rdquo; answers. Tap any card to read it
+          full size.
         </p>
 
         <div className="mt-8 flex flex-wrap gap-2">
@@ -73,7 +76,10 @@ export function ResourcesSection() {
           onClick={() => setOpenIndex(null)}
           className="fixed inset-0 z-[60] flex items-center justify-center bg-foreground/80 p-4 backdrop-blur-sm"
         >
-          <div className="relative max-h-full w-full max-w-3xl overflow-auto" onClick={(e) => e.stopPropagation()}>
+          <div
+            className="relative max-h-full w-full max-w-3xl overflow-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
             <button
               aria-label="Close"
               onClick={() => setOpenIndex(null)}

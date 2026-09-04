@@ -41,14 +41,14 @@ export function PassesSlider() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <span className="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-widest text-brand">
-            <Star className="h-3.5 w-3.5 fill-brand" /> Passed first time
+            <Star className="h-3.5 w-3.5 fill-brand" /> Real learners. Real results.
           </span>
           <h2 className="mt-2 font-display text-3xl font-semibold tracking-tight sm:text-4xl">
-            Passed first time with SkillWise
+            Real SkillWise passes
           </h2>
           <p className="mt-3 text-sm text-white/70">
-            {PASS_IMAGES.length} of our pupils holding their pass certificate — most of them first
-            time, at Rochdale, Chadderton and Cheetham Hill test centres.
+            Celebrating genuine SkillWise Driving Academy pupils who achieved their driving test
+            pass.
           </p>
         </div>
       </div>
@@ -76,7 +76,7 @@ export function PassesSlider() {
                 className="aspect-square w-full object-cover transition duration-500 group-hover:scale-[1.04]"
               />
               <span className="absolute left-3 top-3 rounded-full bg-brand px-2.5 py-1 text-[10px] font-semibold uppercase tracking-widest text-brand-foreground">
-                Passed first time
+                Passed
               </span>
             </button>
           ))}
