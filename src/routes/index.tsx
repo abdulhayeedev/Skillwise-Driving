@@ -711,15 +711,15 @@ const INSTRUCTORS = [
 function InstructorSection() {
   return (
     <section id="instructors" className="py-20">
-      <div className="mx-auto grid max-w-7xl items-stretch gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
-        <div className="overflow-hidden rounded-3xl shadow-brand">
+      <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
+        <div className="overflow-hidden rounded-3xl bg-card shadow-brand">
           <img
             src={tuitionCarImg}
             width={1448}
             height={1086}
             loading="lazy"
             alt="Genuine SkillWise Driving Academy tuition vehicle with roof sign, parked on a residential street"
-            className="h-64 w-full object-cover sm:h-80 lg:h-full lg:min-h-[420px]"
+            className="h-auto w-full object-contain"
           />
         </div>
         <div>
