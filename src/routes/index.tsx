@@ -20,6 +20,7 @@ import {
 import { getPriceForPostcode, type PriceSet } from "@/lib/postcode-pricing";
 import { isValidUkMobile, isValidUkPostcode } from "@/lib/validation";
 import heroImg from "@/assets/hero-driving.jpg";
+import tuitionCarImg from "@/assets/skillwise-tuition-car.jpg";
 import logoAsset from "@/assets/skillwise-logo.jpg";
 import { PassesSlider } from "@/components/PassesSlider";
 import { ResourcesSection } from "@/components/ResourcesSection";
@@ -716,16 +717,14 @@ function InstructorSection() {
             className="absolute -left-4 -top-4 h-full w-full rounded-3xl bg-gradient-brand"
             aria-hidden
           />
-          {/* TODO: swap for Bilal's supplied instructor-section image once received.
-              Placeholder uses the brand mark only — no stock/AI-generated person photo. */}
-          <div className="relative flex aspect-square w-full items-center justify-center rounded-3xl bg-card shadow-brand">
+          <div className="relative flex aspect-square w-full items-center justify-center rounded-3xl bg-card p-4 shadow-brand">
             <img
-              src={logoAsset}
-              width={220}
-              height={220}
+              src={tuitionCarImg}
+              width={1448}
+              height={1086}
               loading="lazy"
-              alt="SkillWise Driving Academy"
-              className="w-2/5 max-w-[220px] object-contain"
+              alt="Genuine SkillWise Driving Academy tuition vehicle with roof sign, parked on a residential street"
+              className="w-full max-w-full rounded-xl object-contain"
             />
           </div>
         </div>
