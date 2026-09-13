@@ -494,15 +494,17 @@ function StatsBar() {
   ];
   return (
     <section className="bg-secondary text-secondary-foreground">
-      <div className="mx-auto grid max-w-7xl grid-cols-2 gap-6 px-4 py-10 sm:px-6 lg:grid-cols-4 lg:px-8">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-6 px-4 py-10 sm:grid-cols-2 sm:px-6 lg:grid-cols-4 lg:px-8">
         {stats.map((s) => (
           <div key={s.label} className="flex items-center gap-4">
             <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-brand/20 text-brand">
               <s.icon className="h-6 w-6" />
             </span>
             <div className="min-w-0">
-              <div className="font-display text-2xl font-semibold tracking-tight">{s.value}</div>
-              <div className="truncate text-xs font-semibold uppercase tracking-widest text-white/70">
+              <div className="font-display text-xl font-semibold tracking-tight sm:text-2xl">
+                {s.value}
+              </div>
+              <div className="text-xs font-semibold uppercase tracking-widest text-white/70">
                 {s.label}
               </div>
             </div>
