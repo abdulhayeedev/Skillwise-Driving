@@ -62,6 +62,8 @@ import p61 from "@/assets/passes/pass-61.jpg";
 import p62 from "@/assets/passes/pass-62.jpg";
 import p63 from "@/assets/passes/pass-63.jpg";
 import p64 from "@/assets/passes/pass-64.jpg";
+import p65 from "@/assets/passes/pass-65.jpg";
+import p66 from "@/assets/passes/pass-66.jpg";
 
 export const PASS_IMAGES: string[] = [
   p1,
@@ -128,4 +130,6 @@ export const PASS_IMAGES: string[] = [
   p62,
   p63,
   p64,
+  p65,
+  p66,
 ];

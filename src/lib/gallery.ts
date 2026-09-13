@@ -30,6 +30,7 @@ import g28 from "@/assets/gallery/tell-me-11.jpg";
 import g29 from "@/assets/gallery/tell-me-12.jpg";
 import g30 from "@/assets/gallery/tell-me-13.jpg";
 import g31 from "@/assets/gallery/tell-me-14.jpg";
+import g32 from "@/assets/gallery/clutch-biting-point.jpg";
 
 export type GalleryCategory = "school" | "tips" | "tellme";
 
@@ -72,6 +73,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
   { src: g29, title: "Tell Me 12 - Engine oil", category: "tellme" },
   { src: g30, title: "Tell Me 13 - Engine coolant", category: "tellme" },
   { src: g31, title: "Tell Me 14 - Brake fluid", category: "tellme" },
+  { src: g32, title: "VW Golf Manual: the clutch & the biting point", category: "tips" },
 ];
 
 export const GALLERY_CATEGORIES: { id: GalleryCategory | "all"; label: string }[] = [
