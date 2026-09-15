@@ -15,6 +15,7 @@ export const Route = createFileRoute("/privacy-policy")({
         content: "How SkillWise Driving Academy collects, uses and protects your information.",
       },
     ],
+    links: [{ rel: "canonical", href: "https://www.skillwisedriving.co.uk/privacy-policy" }],
   }),
 });
 
@@ -124,13 +125,6 @@ function PrivacyPolicyPage() {
               or call/WhatsApp {PHONE_NUMBER}.
             </p>
           </section>
-
-          <p className="rounded-xl border border-dashed border-border bg-muted/40 p-4 text-xs text-muted-foreground">
-            Note: this policy has been drafted to reflect exactly what this website collects and
-            does with it. It hasn't been reviewed by a solicitor — worth a quick legal read-through
-            before launch, particularly if SkillWise starts collecting any further personal data in
-            future (e.g. payment details, ID documents for instructors, CCTV, etc.).
-          </p>
         </div>
       </main>
     </div>

@@ -16,6 +16,12 @@ export const Route = createFileRoute("/terms-and-cancellation-policy")({
           "SkillWise Driving Academy's booking, 48-hour cancellation, no-show and test-day terms.",
       },
     ],
+    links: [
+      {
+        rel: "canonical",
+        href: "https://www.skillwisedriving.co.uk/terms-and-cancellation-policy",
+      },
+    ],
   }),
 });
 
