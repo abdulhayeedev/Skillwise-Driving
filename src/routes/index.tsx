@@ -278,7 +278,7 @@ function Hero() {
             Manchester
           </span>
           <h1 className="mt-5 font-display text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
-            Learn to Drive with Confidence —{" "}
+            Learn to Drive with Confidence{" "}
             <span className="text-brand">SkillWise Driving Academy®</span>
           </h1>
           <p className="mt-5 max-w-xl text-base text-white/80 sm:text-lg">
