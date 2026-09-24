@@ -1,0 +1,50 @@
+{
+  "redirects": [
+    { "source": "/about-us", "destination": "/#instructors", "permanent": true },
+    { "source": "/about-us/", "destination": "/#instructors", "permanent": true },
+
+    { "source": "/reviews", "destination": "/#reviews", "permanent": true },
+    { "source": "/reviews/", "destination": "/#reviews", "permanent": true },
+
+    { "source": "/book-driving-lessons-manchester", "destination": "/#book", "permanent": true },
+    { "source": "/book-driving-lessons-manchester/", "destination": "/#book", "permanent": true },
+
+    { "source": "/driving-lessons-greater-manchester", "destination": "/#areas", "permanent": true },
+    { "source": "/driving-lessons-greater-manchester/", "destination": "/#areas", "permanent": true },
+
+    { "source": "/manual-driving-lessons-manchester", "destination": "/#services", "permanent": true },
+    { "source": "/manual-driving-lessons-manchester/", "destination": "/#services", "permanent": true },
+    { "source": "/automatic-driving-lessons-manchester", "destination": "/#services", "permanent": true },
+    { "source": "/automatic-driving-lessons-manchester/", "destination": "/#services", "permanent": true },
+
+    { "source": "/intensive-driving-course-manchester", "destination": "/#services", "permanent": true },
+    { "source": "/intensive-driving-course-manchester/", "destination": "/#services", "permanent": true },
+    { "source": "/fast-track-driving-lessons", "destination": "/#services", "permanent": true },
+    { "source": "/fast-track-driving-lessons/", "destination": "/#services", "permanent": true },
+    { "source": "/learn-to-drive-in-a-week-manchester", "destination": "/#services", "permanent": true },
+    { "source": "/learn-to-drive-in-a-week-manchester/", "destination": "/#services", "permanent": true },
+
+    { "source": "/motorway-driving-course", "destination": "/#services", "permanent": true },
+    { "source": "/motorway-driving-course/", "destination": "/#services", "permanent": true },
+
+    { "source": "/affordable-driving-schools-near-me", "destination": "/#pricing", "permanent": true },
+    { "source": "/affordable-driving-schools-near-me/", "destination": "/#pricing", "permanent": true },
+    { "source": "/how-much-are-driving-lessons-in-manchester-in-2025", "destination": "/#pricing", "permanent": true },
+    { "source": "/how-much-are-driving-lessons-in-manchester-in-2025/", "destination": "/#pricing", "permanent": true },
+
+    { "source": "/driving-test-exam-questions", "destination": "/#resources", "permanent": true },
+    { "source": "/driving-test-exam-questions/", "destination": "/#resources", "permanent": true },
+
+    { "source": "/learn-to-drive", "destination": "/", "permanent": true },
+    { "source": "/learn-to-drive/", "destination": "/", "permanent": true },
+
+    { "source": "/location/driving-instructor-york", "destination": "/", "permanent": true },
+    { "source": "/location/driving-instructor-york/", "destination": "/", "permanent": true },
+    { "source": "/driving-instructor-training-in-manchester", "destination": "/", "permanent": true },
+    { "source": "/driving-instructor-training-in-manchester/", "destination": "/", "permanent": true },
+    { "source": "/how-long-does-it-take-for-a-driving-licence-to-arrive-in-the-uk", "destination": "/", "permanent": true },
+    { "source": "/how-long-does-it-take-for-a-driving-licence-to-arrive-in-the-uk/", "destination": "/", "permanent": true },
+    { "source": "/how-to-apply-for-a-provisional-drivers-license", "destination": "/", "permanent": true },
+    { "source": "/how-to-apply-for-a-provisional-drivers-license/", "destination": "/", "permanent": true }
+  ]
+}
