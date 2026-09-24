@@ -64,8 +64,15 @@ import p63 from "@/assets/passes/pass-63.jpg";
 import p64 from "@/assets/passes/pass-64.jpg";
 import p65 from "@/assets/passes/pass-65.jpg";
 import p66 from "@/assets/passes/pass-66.jpg";
+import p67 from "@/assets/passes/pass-67.jpg";
 
+// Newest-added pass photos are listed first — when adding a new pass photo,
+// add its import above and its number at the TOP of this array (not the
+// bottom), so it shows first on the site.
 export const PASS_IMAGES: string[] = [
+  p67,
+  p66,
+  p65,
   p1,
   p2,
   p3,
@@ -130,6 +137,4 @@ export const PASS_IMAGES: string[] = [
   p62,
   p63,
   p64,
-  p65,
-  p66,
 ];
