@@ -706,7 +706,7 @@ const INSTRUCTORS = [
     name: "Bilal",
     role: "Founder / Lead Instructor",
     transmission: "Manual",
-    areas: "Rochdale, Heywood, Oldham & Chadderton",
+    areas: "Rochdale, Heywood, Manchester & Chadderton",
   },
 ];
 
