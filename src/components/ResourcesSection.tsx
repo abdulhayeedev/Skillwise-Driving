@@ -1,11 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { X, ZoomIn } from "lucide-react";
 
 import { GALLERY_CATEGORIES, GALLERY_ITEMS, type GalleryCategory } from "@/lib/gallery";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export function ResourcesSection() {
+  const isMobile = useIsMobile();
   const [filter, setFilter] = useState<GalleryCategory | "all">("all");
+  const [filterTouched, setFilterTouched] = useState(false);
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  // Default to "Driving tips" on mobile, "All" everywhere else — but only
+  // until the person picks a tab themselves, so we don't fight their choice.
+  useEffect(() => {
+    if (!filterTouched && isMobile) setFilter("tips");
+  }, [isMobile, filterTouched]);
 
   const items = GALLERY_ITEMS.filter((i) => filter === "all" || i.category === filter);
   const active = openIndex === null ? null : items[openIndex];
@@ -31,6 +40,7 @@ export function ResourcesSection() {
               key={c.id}
               onClick={() => {
                 setFilter(c.id);
+                setFilterTouched(true);
                 setOpenIndex(null);
               }}
               className={`rounded-full border px-4 py-2 text-sm font-medium transition ${
