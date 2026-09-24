@@ -76,7 +76,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 // preview domain, so search engines don't index the dev copy (brief #25).
 // Set to `false` the moment the site is live on www.skillwisedriving.co.uk,
 // then submit the sitemap in Google Search Console (brief #29).
-const NOINDEX_STAGING = true;
+const NOINDEX_STAGING = false;
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
