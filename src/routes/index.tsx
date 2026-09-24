@@ -267,6 +267,9 @@ function Hero() {
           alt="Learner driver smiling behind the wheel"
           width={1600}
           height={1100}
+          fetchPriority="high"
+          loading="eager"
+          decoding="async"
           className="h-full w-full object-cover"
         />
       </div>
