@@ -891,7 +891,9 @@ function BookingSection() {
                 <div className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
                   Call us
                 </div>
-                <div className="truncate font-display text-lg font-semibold">{PHONE_NUMBER}</div>
+                <div className="font-display text-lg font-semibold leading-snug">
+                  {PHONE_NUMBER}
+                </div>
               </div>
             </a>
             <a
@@ -905,7 +907,7 @@ function BookingSection() {
                 <div className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
                   WhatsApp
                 </div>
-                <div className="truncate font-display text-lg font-semibold">
+                <div className="font-display text-lg font-semibold leading-snug">
                   Message us instantly
                 </div>
               </div>
@@ -921,7 +923,9 @@ function BookingSection() {
                 <div className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
                   Email
                 </div>
-                <div className="truncate font-display text-lg font-semibold">{EMAIL}</div>
+                <div className="break-words font-display text-lg font-semibold leading-snug">
+                  {EMAIL}
+                </div>
               </div>
             </a>
             <div className="flex items-center gap-3 rounded-2xl border border-border bg-card p-4">
@@ -932,7 +936,7 @@ function BookingSection() {
                 <div className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
                   Coverage
                 </div>
-                <div className="truncate font-display text-lg font-semibold">
+                <div className="font-display text-lg font-semibold leading-snug">
                   Serving Rochdale &amp; Manchester
                 </div>
               </div>
