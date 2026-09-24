@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
+import nodemailer from "nodemailer";
 
 import {
   isValidUkMobile,
@@ -9,23 +10,30 @@ import {
 } from "@/lib/validation";
 
 // ---------------------------------------------------------------------------
-// Sends enquiry-form submissions to info@skillwisedriving.co.uk via Resend's
-// HTTP API (https://resend.com). No SDK dependency — just fetch.
+// Sends enquiry-form submissions to info@skillwisedriving.co.uk via SMTP,
+// using the info@skillwisedriving.co.uk mailbox itself (IONOS-hosted) to
+// send. No third-party email provider needed.
 //
 // REQUIRED environment variables (set these in the Vercel project settings —
 // Project → Settings → Environment Variables — never commit them to code):
 //
-//   RESEND_API_KEY     Resend API key (create one at resend.com after
-//                       verifying the skillwisedriving.co.uk sending domain)
-//   ENQUIRY_TO_EMAIL   Where enquiries are delivered, e.g.
-//                       info@skillwisedriving.co.uk
-//   ENQUIRY_FROM_EMAIL The verified "from" address Resend sends as, e.g.
-//                       enquiries@skillwisedriving.co.uk
+//   SMTP_HOST   smtp.ionos.co.uk
+//   SMTP_PORT   587 (STARTTLS) — 465 also works if set with SMTP_SECURE=true
+//   SMTP_USER   info@skillwisedriving.co.uk
+//   SMTP_PASS   that mailbox's password
+//   ENQUIRY_TO_EMAIL   where enquiries are delivered, e.g.
+//                      info@skillwisedriving.co.uk (can be the same mailbox)
 //
 // If these aren't set, the endpoint returns a 500 with a clear error rather
 // than pretending the enquiry was sent — per the brief: "The website should
 // only report a successful submission if the backend has actually accepted
 // the enquiry."
+//
+// NOTE: this requires a Node.js server runtime with raw TCP socket support
+// (standard Vercel serverless functions have this). It will NOT work on an
+// edge/Workers-style runtime — if SMTP connections fail in production with a
+// socket/connection error, that's the likely cause and we'd need to switch
+// to an HTTP-based provider (e.g. Resend) instead.
 // ---------------------------------------------------------------------------
 
 const LESSON_TYPES = [
@@ -106,13 +114,15 @@ export const Route = createFileRoute("/api/enquiry")({
 
         const notes = (body.notes ?? "").trim().slice(0, 800);
 
-        const apiKey = process.env.RESEND_API_KEY;
+        const smtpHost = process.env.SMTP_HOST;
+        const smtpPort = process.env.SMTP_PORT;
+        const smtpUser = process.env.SMTP_USER;
+        const smtpPass = process.env.SMTP_PASS;
         const toEmail = process.env.ENQUIRY_TO_EMAIL;
-        const fromEmail = process.env.ENQUIRY_FROM_EMAIL;
 
-        if (!apiKey || !toEmail || !fromEmail) {
+        if (!smtpHost || !smtpPort || !smtpUser || !smtpPass || !toEmail) {
           console.error(
-            "Enquiry email not sent — missing RESEND_API_KEY / ENQUIRY_TO_EMAIL / ENQUIRY_FROM_EMAIL env vars",
+            "Enquiry email not sent — missing SMTP_HOST / SMTP_PORT / SMTP_USER / SMTP_PASS / ENQUIRY_TO_EMAIL env vars",
           );
           return new Response(
             JSON.stringify({
@@ -153,31 +163,22 @@ export const Route = createFileRoute("/api/enquiry")({
         `;
 
         try {
-          const resendResponse = await fetch("https://api.resend.com/emails", {
-            method: "POST",
-            headers: {
-              Authorization: `Bearer ${apiKey}`,
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              from: `SkillWise Website <${fromEmail}>`,
-              to: [toEmail],
-              subject: `New enquiry — ${name} (${postcode})`,
-              text: textLines.join("\n"),
-              html,
-            }),
+          const port = parseInt(smtpPort, 10);
+          const transporter = nodemailer.createTransport({
+            host: smtpHost,
+            port,
+            secure: process.env.SMTP_SECURE === "true" || port === 465,
+            auth: { user: smtpUser, pass: smtpPass },
           });
 
-          if (!resendResponse.ok) {
-            const errBody = await resendResponse.text();
-            console.error("Resend API error:", resendResponse.status, errBody);
-            return new Response(
-              JSON.stringify({
-                error: "We couldn't send your enquiry. Please call or WhatsApp us instead.",
-              }),
-              { status: 502, headers: { "content-type": "application/json" } },
-            );
-          }
+          await transporter.sendMail({
+            from: `"SkillWise Website" <${smtpUser}>`,
+            to: toEmail,
+            replyTo: smtpUser,
+            subject: `New enquiry — ${name} (${postcode})`,
+            text: textLines.join("\n"),
+            html,
+          });
         } catch (err) {
           console.error("Enquiry email send failed:", err);
           return new Response(
