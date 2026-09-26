@@ -10,6 +10,8 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DrivingLessonsManchesterRouteImport } from './routes/driving-lessons-manchester'
+import { Route as DrivingLessonsRochdaleRouteImport } from './routes/driving-lessons-rochdale'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as TermsAndCancellationPolicyRouteImport } from './routes/terms-and-cancellation-policy'
@@ -18,6 +20,17 @@ import { Route as ApiEnquiryRouteImport } from './routes/api/enquiry'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DrivingLessonsManchesterRoute =
+  DrivingLessonsManchesterRouteImport.update({
+    id: '/driving-lessons-manchester',
+    path: '/driving-lessons-manchester',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DrivingLessonsRochdaleRoute = DrivingLessonsRochdaleRouteImport.update({
+  id: '/driving-lessons-rochdale',
+  path: '/driving-lessons-rochdale',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
@@ -44,6 +57,8 @@ const ApiEnquiryRoute = ApiEnquiryRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/driving-lessons-manchester': typeof DrivingLessonsManchesterRoute
+  '/driving-lessons-rochdale': typeof DrivingLessonsRochdaleRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms-and-cancellation-policy': typeof TermsAndCancellationPolicyRoute
@@ -51,6 +66,8 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/driving-lessons-manchester': typeof DrivingLessonsManchesterRoute
+  '/driving-lessons-rochdale': typeof DrivingLessonsRochdaleRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms-and-cancellation-policy': typeof TermsAndCancellationPolicyRoute
@@ -59,6 +76,8 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/driving-lessons-manchester': typeof DrivingLessonsManchesterRoute
+  '/driving-lessons-rochdale': typeof DrivingLessonsRochdaleRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms-and-cancellation-policy': typeof TermsAndCancellationPolicyRoute
@@ -68,6 +87,8 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/driving-lessons-manchester'
+    | '/driving-lessons-rochdale'
     | '/privacy-policy'
     | '/sitemap.xml'
     | '/terms-and-cancellation-policy'
@@ -75,6 +96,8 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/driving-lessons-manchester'
+    | '/driving-lessons-rochdale'
     | '/privacy-policy'
     | '/sitemap.xml'
     | '/terms-and-cancellation-policy'
@@ -82,6 +105,8 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/driving-lessons-manchester'
+    | '/driving-lessons-rochdale'
     | '/privacy-policy'
     | '/sitemap.xml'
     | '/terms-and-cancellation-policy'
@@ -90,6 +115,8 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DrivingLessonsManchesterRoute: typeof DrivingLessonsManchesterRoute
+  DrivingLessonsRochdaleRoute: typeof DrivingLessonsRochdaleRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsAndCancellationPolicyRoute: typeof TermsAndCancellationPolicyRoute
@@ -103,6 +130,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/driving-lessons-manchester': {
+      id: '/driving-lessons-manchester'
+      path: '/driving-lessons-manchester'
+      fullPath: '/driving-lessons-manchester'
+      preLoaderRoute: typeof DrivingLessonsManchesterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/driving-lessons-rochdale': {
+      id: '/driving-lessons-rochdale'
+      path: '/driving-lessons-rochdale'
+      fullPath: '/driving-lessons-rochdale'
+      preLoaderRoute: typeof DrivingLessonsRochdaleRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/privacy-policy': {
@@ -138,6 +179,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DrivingLessonsManchesterRoute: DrivingLessonsManchesterRoute,
+  DrivingLessonsRochdaleRoute: DrivingLessonsRochdaleRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsAndCancellationPolicyRoute: TermsAndCancellationPolicyRoute,

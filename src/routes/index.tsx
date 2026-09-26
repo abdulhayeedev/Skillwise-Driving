@@ -1284,6 +1284,7 @@ const AREAS = [
     price: "£70 / 2 hours (£35 per hour)",
     blurb:
       "Our home patch. Lessons cover Rochdale town centre, Heywood, Castleton, Norden, Milnrow and Littleborough, with practice on local roads, junctions and roundabouts commonly encountered around Rochdale Driving Test Centre.",
+    href: "/driving-lessons-rochdale",
   },
   {
     town: "Driving lessons in Oldham & Chadderton",
@@ -1296,6 +1297,7 @@ const AREAS = [
     price: "£76 / 2 hours (£38 per hour)",
     blurb:
       "City-centre traffic, bus lanes and multi-lane roundabouts across our selected Manchester postcode areas — taught calmly in a dual-controlled car.",
+    href: "/driving-lessons-manchester",
   },
 ];
 
@@ -1321,12 +1323,16 @@ function AreasSection() {
               <h3 className="font-display text-lg font-semibold">{a.town}</h3>
               <p className="mt-3 text-sm font-medium text-brand">{a.price}</p>
               <p className="mt-3 text-sm text-muted-foreground">{a.blurb}</p>
-              <a
-                href="#pricing"
-                className="mt-4 inline-flex text-sm font-medium text-brand hover:underline"
-              >
-                Check your postcode price
-              </a>
+              <div className="mt-4 flex flex-col items-start gap-1">
+                {a.href && (
+                  <a href={a.href} className="text-sm font-medium text-brand hover:underline">
+                    Read the full {a.town.replace("Driving lessons in ", "")} guide →
+                  </a>
+                )}
+                <a href="#pricing" className="text-sm font-medium text-brand hover:underline">
+                  Check your postcode price
+                </a>
+              </div>
             </article>
           ))}
         </div>
