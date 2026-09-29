@@ -1,5 +1,14 @@
 {
   "redirects": [
+    { "source": "/rochdale", "destination": "/driving-lessons-rochdale", "permanent": true },
+    { "source": "/rochdale/", "destination": "/driving-lessons-rochdale", "permanent": true },
+
+    { "source": "/manchester", "destination": "/driving-lessons-manchester", "permanent": true },
+    { "source": "/manchester/", "destination": "/driving-lessons-manchester", "permanent": true },
+
+    { "source": "/oldham", "destination": "/#areas", "permanent": true },
+    { "source": "/oldham/", "destination": "/#areas", "permanent": true },
+
     { "source": "/about-us", "destination": "/#instructors", "permanent": true },
     { "source": "/about-us/", "destination": "/#instructors", "permanent": true },
 
