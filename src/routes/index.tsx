@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import {
   Car,
   Phone,
@@ -800,6 +800,7 @@ function BookingSection() {
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<{ phone?: string; postcode?: string }>({});
+  const resultCardRef = useRef<HTMLDivElement>(null);
   const [form, setForm] = useState({
     name: "",
     phone: "",
@@ -809,6 +810,14 @@ function BookingSection() {
     availability: [] as string[],
     notes: "",
   });
+
+  // Scroll the success message into view once it appears — on a long form,
+  // the page can otherwise stay scrolled down past where it renders.
+  useEffect(() => {
+    if (submitted) {
+      resultCardRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, [submitted]);
 
   function update<K extends keyof typeof form>(k: K, v: (typeof form)[K]) {
     setForm((f) => ({ ...f, [k]: v }));
@@ -947,7 +956,10 @@ function BookingSection() {
           </div>
         </div>
 
-        <div className="rounded-3xl border border-border bg-card p-6 shadow-brand sm:p-8">
+        <div
+          ref={resultCardRef}
+          className="rounded-3xl border border-border bg-card p-6 shadow-brand sm:p-8"
+        >
           {submitted ? (
             <div className="flex h-full flex-col items-center justify-center py-10 text-center">
               <span className="grid h-16 w-16 place-items-center rounded-full bg-brand/10 text-brand">
