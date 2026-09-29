@@ -128,6 +128,19 @@ const SECTIONS: { title: string; paragraphs: string[] }[] = [
       "A booking is confirmed once SkillWise Driving Academy has agreed the lesson arrangements and any required payment conditions have been met.",
     ],
   },
+  {
+    title: "Complaints",
+    paragraphs: [
+      "SkillWise Driving Academy® aims to provide a professional, safe and high-quality service.",
+      "If you are unhappy with any aspect of your lessons, instructor or service, please contact us in the first instance so we have the opportunity to resolve the matter.",
+      `Phone / WhatsApp: ${PHONE_NUMBER}`,
+      `Email: ${EMAIL}`,
+      "Please include your name, instructor name, relevant lesson dates and a clear explanation of your concern.",
+      "We will review complaints fairly and aim to respond as soon as reasonably possible.",
+      "SkillWise Driving Academy® will keep a record of complaints received and how they were resolved.",
+      "If you remain unhappy after completing our complaints process, you may seek independent advice or contact the appropriate regulatory body.",
+    ],
+  },
 ];
 
 function TermsPage() {
