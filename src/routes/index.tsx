@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useCallback, useEffect, useRef, useState, type FormEvent } from "react";
 import {
   Car,
   Phone,
@@ -16,6 +16,8 @@ import {
   Sparkles,
   Menu,
   X,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import { getPriceForPostcode, type PriceSet } from "@/lib/postcode-pricing";
 import { isValidUkMobile, isValidUkPostcode } from "@/lib/validation";
@@ -697,6 +699,25 @@ const REVIEWS = [
 ];
 
 function ReviewsSection() {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [paused, setPaused] = useState(false);
+
+  const scrollBy = useCallback((dir: 1 | -1) => {
+    const el = trackRef.current;
+    if (!el) return;
+    const step = el.clientWidth * 0.8;
+    let next = el.scrollLeft + dir * step;
+    if (next > el.scrollWidth - el.clientWidth - 8) next = 0;
+    if (next < 0) next = el.scrollWidth;
+    el.scrollTo({ left: next, behavior: "smooth" });
+  }, []);
+
+  useEffect(() => {
+    if (paused) return;
+    const id = window.setInterval(() => scrollBy(1), 4000);
+    return () => window.clearInterval(id);
+  }, [paused, scrollBy]);
+
   return (
     <section id="reviews" className="border-t border-border bg-muted/30 py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -711,11 +732,21 @@ function ReviewsSection() {
             Genuine reviews from real SkillWise Driving Academy pupils, straight from Google.
           </p>
         </div>
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      </div>
+
+      <div
+        className="relative mt-10"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+      >
+        <div
+          ref={trackRef}
+          className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-4 pb-4 sm:px-6 lg:px-8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        >
           {REVIEWS.map((r) => (
             <div
               key={r.name}
-              className="flex flex-col rounded-2xl border border-border bg-card p-5 shadow-sm"
+              className="flex w-72 shrink-0 snap-start flex-col rounded-2xl border border-border bg-card p-5 shadow-sm sm:w-80"
             >
               <div className="flex items-center gap-1 text-brand">
                 {Array.from({ length: 5 }).map((_, i) => (
@@ -728,6 +759,21 @@ function ReviewsSection() {
             </div>
           ))}
         </div>
+
+        <button
+          aria-label="Previous"
+          onClick={() => scrollBy(-1)}
+          className="absolute left-2 top-1/2 z-10 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full bg-background/90 text-foreground shadow-lg transition hover:bg-background"
+        >
+          <ChevronLeft className="h-5 w-5" />
+        </button>
+        <button
+          aria-label="Next"
+          onClick={() => scrollBy(1)}
+          className="absolute right-2 top-1/2 z-10 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full bg-background/90 text-foreground shadow-lg transition hover:bg-background"
+        >
+          <ChevronRight className="h-5 w-5" />
+        </button>
       </div>
     </section>
   );

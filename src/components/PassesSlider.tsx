@@ -37,7 +37,7 @@ export function PassesSlider() {
   }, [lightbox]);
 
   return (
-    <section id="reviews" className="bg-secondary py-20 text-secondary-foreground">
+    <section className="bg-secondary py-20 text-secondary-foreground">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <span className="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-widest text-brand">
