@@ -734,19 +734,20 @@ function ReviewsSection() {
         </div>
       </div>
 
+      {/* Mobile: slider */}
       <div
-        className="mt-10"
+        className="mt-10 sm:hidden"
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >
         <div
           ref={trackRef}
-          className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-4 pb-4 sm:px-6 lg:px-8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-4 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           {REVIEWS.map((r) => (
             <div
               key={r.name}
-              className="flex w-72 shrink-0 snap-start flex-col rounded-2xl border border-border bg-card p-5 shadow-sm sm:w-80"
+              className="flex w-72 shrink-0 snap-start flex-col rounded-2xl border border-border bg-card p-5 shadow-sm"
             >
               <div className="flex items-center gap-1 text-brand">
                 {Array.from({ length: 5 }).map((_, i) => (
@@ -776,6 +777,25 @@ function ReviewsSection() {
             <ChevronRight className="h-5 w-5" />
           </button>
         </div>
+      </div>
+
+      {/* Tablet/desktop: static grid */}
+      <div className="mx-auto hidden max-w-7xl px-4 sm:mt-10 sm:grid sm:grid-cols-2 sm:gap-5 sm:px-6 lg:grid-cols-4 lg:px-8">
+        {REVIEWS.map((r) => (
+          <div
+            key={r.name}
+            className="flex flex-col rounded-2xl border border-border bg-card p-5 shadow-sm"
+          >
+            <div className="flex items-center gap-1 text-brand">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star key={i} className="h-4 w-4 fill-brand" />
+              ))}
+            </div>
+            <p className="mt-3 flex-1 text-sm text-muted-foreground">"{r.text}"</p>
+            <p className="mt-4 text-sm font-semibold">{r.name}</p>
+            <p className="text-xs text-muted-foreground">Google review</p>
+          </div>
+        ))}
       </div>
     </section>
   );
