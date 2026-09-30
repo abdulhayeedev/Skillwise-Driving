@@ -705,12 +705,19 @@ function ReviewsSection() {
   const scrollBy = useCallback((dir: 1 | -1) => {
     const el = trackRef.current;
     if (!el) return;
-    const step = el.clientWidth * 0.8;
+    const step = el.clientWidth;
     let next = el.scrollLeft + dir * step;
     if (next > el.scrollWidth - el.clientWidth - 8) next = 0;
     if (next < 0) next = el.scrollWidth;
     el.scrollTo({ left: next, behavior: "smooth" });
   }, []);
+
+  // Pause the auto-advance for good once the person interacts manually
+  // (arrow tap or a swipe) — mouseenter/leave alone doesn't cover touch,
+  // so without this the carousel could yank itself forward mid-swipe.
+  function stopAuto() {
+    setPaused(true);
+  }
 
   useEffect(() => {
     if (paused) return;
@@ -729,34 +736,33 @@ function ReviewsSection() {
             5-Star Google Reviews
           </h2>
           <p className="mt-3 text-muted-foreground">
-            Genuine reviews from real SkillWise Driving Academy pupils, straight from Google.
+            Genuine Google reviews from real SkillWise Driving Academy pupils.
           </p>
         </div>
       </div>
 
-      {/* Mobile: slider */}
-      <div
-        className="mt-10 sm:hidden"
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
-      >
+      {/* Mobile: one-card-at-a-time slider, swipeable via native touch scroll */}
+      <div className="mt-10 sm:hidden" onMouseEnter={stopAuto} onTouchStart={stopAuto}>
         <div
           ref={trackRef}
-          className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-4 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="flex snap-x snap-mandatory overflow-x-auto scroll-smooth px-4 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           {REVIEWS.map((r) => (
-            <div
-              key={r.name}
-              className="flex w-72 shrink-0 snap-start flex-col rounded-2xl border border-border bg-card p-5 shadow-sm"
-            >
-              <div className="flex items-center gap-1 text-brand">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} className="h-4 w-4 fill-brand" />
-                ))}
+            <div key={r.name} className="flex w-[calc(100vw-2rem)] shrink-0 snap-center">
+              <div className="flex h-full w-full flex-col rounded-2xl border border-border bg-card p-6 shadow-sm">
+                <div className="flex items-center gap-1 text-brand">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star key={i} className="h-4 w-4 fill-brand" />
+                  ))}
+                </div>
+                <p className="mt-3 flex-1 text-base leading-relaxed text-muted-foreground">
+                  "{r.text}"
+                </p>
+                <div className="mt-3 shrink-0">
+                  <p className="text-base font-semibold">{r.name}</p>
+                  <p className="text-sm text-muted-foreground">Google review</p>
+                </div>
               </div>
-              <p className="mt-3 flex-1 text-sm text-muted-foreground">"{r.text}"</p>
-              <p className="mt-4 text-sm font-semibold">{r.name}</p>
-              <p className="text-xs text-muted-foreground">Google review</p>
             </div>
           ))}
         </div>
@@ -764,14 +770,20 @@ function ReviewsSection() {
         <div className="mt-4 flex justify-center gap-3">
           <button
             aria-label="Previous"
-            onClick={() => scrollBy(-1)}
+            onClick={() => {
+              stopAuto();
+              scrollBy(-1);
+            }}
             className="grid h-11 w-11 place-items-center rounded-full border border-border bg-card text-foreground shadow-sm transition hover:bg-muted"
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
           <button
             aria-label="Next"
-            onClick={() => scrollBy(1)}
+            onClick={() => {
+              stopAuto();
+              scrollBy(1);
+            }}
             className="grid h-11 w-11 place-items-center rounded-full border border-border bg-card text-foreground shadow-sm transition hover:bg-muted"
           >
             <ChevronRight className="h-5 w-5" />
@@ -784,7 +796,7 @@ function ReviewsSection() {
         {REVIEWS.map((r) => (
           <div
             key={r.name}
-            className="flex flex-col rounded-2xl border border-border bg-card p-5 shadow-sm"
+            className="flex h-full flex-col rounded-2xl border border-border bg-card p-5 shadow-sm"
           >
             <div className="flex items-center gap-1 text-brand">
               {Array.from({ length: 5 }).map((_, i) => (
@@ -792,8 +804,10 @@ function ReviewsSection() {
               ))}
             </div>
             <p className="mt-3 flex-1 text-sm text-muted-foreground">"{r.text}"</p>
-            <p className="mt-4 text-sm font-semibold">{r.name}</p>
-            <p className="text-xs text-muted-foreground">Google review</p>
+            <div className="mt-3 shrink-0">
+              <p className="text-sm font-semibold">{r.name}</p>
+              <p className="text-xs text-muted-foreground">Google review</p>
+            </div>
           </div>
         ))}
       </div>
