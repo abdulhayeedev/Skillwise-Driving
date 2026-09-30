@@ -147,6 +147,7 @@ function Home() {
       <StatsBar />
       <ServicesSection />
       <PassesSlider />
+      <ReviewsSection />
       <WhyChooseSection />
       <NervousLearnersSection />
       <InstructorSection />
@@ -651,6 +652,79 @@ function WhyChooseSection() {
                 <h3 className="font-display text-lg font-semibold">{i.title}</h3>
                 <p className="mt-1 text-sm text-muted-foreground">{i.desc}</p>
               </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- Reviews ---------------- */
+const REVIEWS = [
+  {
+    name: "rio vickar",
+    text: "Passed first time today thanks to Bilal. He's really easy to talk to and I never felt awkward during lessons. He taught me how to drive quickly and properly, and his prices are very reasonable too. Would definitely recommend him to anyone looking for a driving instructor in Rochdale.",
+  },
+  {
+    name: "Alexandra Claro",
+    text: "Passed my driving test today! A huge thank you to my instructor Bilal for all his help and support. He's very wise, patient, encouraging, and always explains things in a way that's easy to understand. He helped build my confidence and made every lesson enjoyable. I'd highly recommend him to anyone looking for a great driving instructor!",
+  },
+  {
+    name: "joel k",
+    text: "Honestly the best instructor I could have asked for, from the first lesson all the way up until the test day Bilal has been nothing but supportive and clear with the way he gives instructions and explains certain concepts. Without him I honestly don't think I would have passed first time.",
+  },
+  {
+    name: "Mohamad Alessa",
+    text: "I passed first time in Rochdale thanks to Bilal at SkillWise Driving Academy! From the first lesson, Bilal made me feel comfortable and confident behind the wheel.",
+  },
+  {
+    name: "Vishnu P S",
+    text: "I had a great experience with this Skillwise driving Academy. They provided excellent support throughout my journey to getting my license. The instructor Bilal explained every lesson in a very simple and easy-to-understand way.",
+  },
+  {
+    name: "Zyaam",
+    text: "Bilal is a great instructor, he was always kind and patient with me and never made me feel nervous during my lessons. This helped me be more relaxed and confident while driving.",
+  },
+  {
+    name: "Imran Anjum",
+    text: "Really good experience with SkillWise Driving Academy. Bilal is patient, easy to learn with, and explains everything properly without making you feel stressed.",
+  },
+  {
+    name: "Mallu Beast",
+    text: "I had a very positive experience with my driving lessons. The instructor consistently demonstrated politeness, patience, and strong support throughout the entire learning process.",
+  },
+];
+
+function ReviewsSection() {
+  return (
+    <section id="reviews" className="border-t border-border bg-muted/30 py-20">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-2xl text-center">
+          <span className="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-widest text-brand">
+            <Star className="h-3.5 w-3.5 fill-brand" /> Highly Rated by Learners
+          </span>
+          <h2 className="mt-2 font-display text-3xl font-semibold tracking-tight sm:text-4xl">
+            5-Star Google Reviews
+          </h2>
+          <p className="mt-3 text-muted-foreground">
+            Genuine reviews from real SkillWise Driving Academy pupils, straight from Google.
+          </p>
+        </div>
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {REVIEWS.map((r) => (
+            <div
+              key={r.name}
+              className="flex flex-col rounded-2xl border border-border bg-card p-5 shadow-sm"
+            >
+              <div className="flex items-center gap-1 text-brand">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star key={i} className="h-4 w-4 fill-brand" />
+                ))}
+              </div>
+              <p className="mt-3 flex-1 text-sm text-muted-foreground">"{r.text}"</p>
+              <p className="mt-4 text-sm font-semibold">{r.name}</p>
+              <p className="text-xs text-muted-foreground">Google review</p>
             </div>
           ))}
         </div>
