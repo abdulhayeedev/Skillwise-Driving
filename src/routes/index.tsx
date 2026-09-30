@@ -735,7 +735,7 @@ function ReviewsSection() {
       </div>
 
       <div
-        className="relative mt-10"
+        className="mt-10"
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >
@@ -760,20 +760,22 @@ function ReviewsSection() {
           ))}
         </div>
 
-        <button
-          aria-label="Previous"
-          onClick={() => scrollBy(-1)}
-          className="absolute left-2 top-1/2 z-10 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full bg-background/90 text-foreground shadow-lg transition hover:bg-background"
-        >
-          <ChevronLeft className="h-5 w-5" />
-        </button>
-        <button
-          aria-label="Next"
-          onClick={() => scrollBy(1)}
-          className="absolute right-2 top-1/2 z-10 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full bg-background/90 text-foreground shadow-lg transition hover:bg-background"
-        >
-          <ChevronRight className="h-5 w-5" />
-        </button>
+        <div className="mt-4 flex justify-center gap-3">
+          <button
+            aria-label="Previous"
+            onClick={() => scrollBy(-1)}
+            className="grid h-11 w-11 place-items-center rounded-full border border-border bg-card text-foreground shadow-sm transition hover:bg-muted"
+          >
+            <ChevronLeft className="h-5 w-5" />
+          </button>
+          <button
+            aria-label="Next"
+            onClick={() => scrollBy(1)}
+            className="grid h-11 w-11 place-items-center rounded-full border border-border bg-card text-foreground shadow-sm transition hover:bg-muted"
+          >
+            <ChevronRight className="h-5 w-5" />
+          </button>
+        </div>
       </div>
     </section>
   );
