@@ -1459,6 +1459,7 @@ const AREAS = [
     price: "£76 / 2 hours (£38 per hour)",
     blurb:
       "Oldham, Chadderton, Royton, Shaw, Failsworth and Saddleworth learners can have pick-up arrangements agreed with their SkillWise instructor. Lessons can include Oldham's hill starts, busy junctions, tram crossings and local test-area roads where appropriate.",
+    href: "/driving-lessons-oldham",
   },
   {
     town: "Driving lessons in Manchester",
