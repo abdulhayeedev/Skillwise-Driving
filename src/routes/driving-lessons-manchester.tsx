@@ -96,6 +96,10 @@ function LessonPageFooter() {
           <a href="/driving-lessons-rochdale" className="hover:text-white">
             Driving Lessons in Rochdale
           </a>
+          {" · "}
+          <a href="/driving-lessons-oldham" className="hover:text-white">
+            Driving Lessons in Oldham
+          </a>
         </p>
         <p className="mt-3 text-xs text-white/50">
           © {new Date().getFullYear()} SkillWise Driving Academy. All rights reserved.
