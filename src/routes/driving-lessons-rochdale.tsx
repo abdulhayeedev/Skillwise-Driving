@@ -90,6 +90,10 @@ function LessonPageFooter() {
             Terms &amp; Cancellation Policy
           </a>
           {" · "}
+          <a href="/driving-lessons-oldham" className="hover:text-white">
+            Driving Lessons in Oldham
+          </a>
+          {" · "}
           <a href="/driving-lessons-manchester" className="hover:text-white">
             Driving Lessons in Manchester
           </a>
