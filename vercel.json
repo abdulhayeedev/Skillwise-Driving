@@ -6,8 +6,8 @@
     { "source": "/manchester", "destination": "/driving-lessons-manchester", "permanent": true },
     { "source": "/manchester/", "destination": "/driving-lessons-manchester", "permanent": true },
 
-    { "source": "/oldham", "destination": "/#areas", "permanent": true },
-    { "source": "/oldham/", "destination": "/#areas", "permanent": true },
+    { "source": "/oldham", "destination": "/driving-lessons-oldham", "permanent": true },
+    { "source": "/oldham/", "destination": "/driving-lessons-oldham", "permanent": true },
 
     { "source": "/about-us", "destination": "/#instructors", "permanent": true },
     { "source": "/about-us/", "destination": "/#instructors", "permanent": true },
