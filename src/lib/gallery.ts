@@ -53,6 +53,7 @@ import g51 from "@/assets/gallery/why-coasting-is-wrong.jpg";
 import g52 from "@/assets/gallery/seatbelt-under-arm.jpg";
 import g53 from "@/assets/gallery/reversing-made-simple.jpg";
 import g54 from "@/assets/gallery/dvsa-test-swap-change.jpg";
+import g55 from "@/assets/gallery/winter-driving-highway-code-rules.jpg";
 
 export type GalleryCategory = "school" | "tips" | "tellme";
 
@@ -126,6 +127,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
   { src: g52, title: "Seatbelt under your arm? Wear it properly", category: "tips" },
   { src: g53, title: "Reversing made simple", category: "tips" },
   { src: g54, title: "DVSA test swap change — from 1 October", category: "tips" },
+  { src: g55, title: "Winter driving: 5 Highway Code rules to know before your test", category: "tips" },
 ];
 
 export const GALLERY_CATEGORIES: { id: GalleryCategory | "all"; label: string }[] = [
